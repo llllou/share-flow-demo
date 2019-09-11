@@ -19,5 +19,11 @@ const App: React.FC = () => {
     </div>
   );
 }
-
+export interface Node{
+  from: Node|null,
+  to: Node|null,
+  data?: Object[],
+  el: Element|null|undefined,
+  type: string|undefined
+}
 export default App;

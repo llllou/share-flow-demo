@@ -1,0 +1,135 @@
+.flow-wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-node {
+    padding: 5px 5px;
+    background-color: #e9b744;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.flow-block {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    .flow-line {
+        width: 1px;
+        min-height: 30px;
+        background-color: rgb(19, 16, 16);
+        flex: 1;
+        flex-shrink: 0;
+    }
+}
+
+.end-icon {
+    margin: 0 auto;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #66ccff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pre-check-node,
+.pre-write-node {
+    position: relative;
+    width: 300px;
+    border: 1px solid #f1f1f1;
+    .node-close {
+        position: absolute;
+        display: none;
+        font-size: 20px;
+        cursor: pointer;
+        right: -10px;
+        top: -10px;
+        z-index: 10;
+    }
+    .ant-list-item:first-of-type {
+        padding: 0;
+    }
+    &:hover .node-close {
+        display: inline-block;
+    }
+    h4 {
+        color: #3c3c3c;
+        font-size: 16px;
+    }
+}
+
+.node-footer {
+    display: flex;
+    justify-content: space-around
+}
+
+.begin-node {
+    position: relative;
+    width: 300px;
+    border: 1px solid #f1f1f1;
+    .ant-list-item {
+        padding: 0
+    }
+    .begin-title {
+        width: 100%;
+        margin-bottom: 0;
+        padding: 10px 0;
+        font-weight: bold;
+        text-align: left;
+        text-indent: 2em;
+        color: #fff;
+        background: linear-gradient(90deg, #f04b0b 3%, #ebbfab 93%);
+    }
+    .begin-content {
+        font-size: 16px;
+        color: #666;
+    }
+}
+
+.check-node,
+.write-node {
+    position: relative;
+    width: 300px;
+    border: 1px solid #f1f1f1;
+    .node-close {
+        position: absolute;
+        display: none;
+        color: red;
+        font-size: 20px;
+        top: -10px;
+        right: -10px;
+        z-index: 10;
+    }
+    &:hover .node-close {
+        display: inline-block;
+    }
+    .node-header {
+        height: 60px;
+        padding: 10px;
+        line-height: 40px;
+        text-align: left
+    }
+}
+
+.check-node {
+    .node-header {
+        background: linear-gradient(90deg, #324963 3%, #828fa5 93%);
+    }
+}
+
+.write-node {
+    .node-header {
+        background: linear-gradient(90deg, #f69b31 0, #f7d44d 99%);
+    }
+}
+
+.pre-check-node {
+    border-top: 4px solid #66ccff;
+}
+
+.pre-write-node {
+    border-top: 4px solid #eeb124;
+}
