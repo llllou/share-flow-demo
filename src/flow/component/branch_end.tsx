@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {DataNode} from "../index"
 import _ from 'lodash'
-export default class BranchEnd extends Component<{list: DataNode[]}> {
+export default class BranchEnd extends Component<{list: DataNode[],width: string}> {
     id: string
-    constructor(props:{list:DataNode[]}){
+    constructor(props:{list:DataNode[],width: string}){
         super(props)
         this.id = _.uniqueId()
     }
@@ -17,6 +17,7 @@ export default class BranchEnd extends Component<{list: DataNode[]}> {
                         })
                     }
                 </div>
+                <div className="branch-end-bottom" style={{width: this.props.width}}></div>
                 <div className="flow-line"></div>
             </div>
         )

@@ -1,17 +1,23 @@
-$black: rgb(19, 16, 16);
+$black: #a59999;
+.share-flow__container {
+    overflow-x: scroll;
+}
+
 .flow-wrapper {
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
-.flow-container{
+
+.flow-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    >.flow-block{
+    min-width: 300px;
+    >.flow-block {
         flex: 1;
     }
 }
+
 .add-node {
     padding: 5px 5px;
     background-color: #e9b744;
@@ -25,7 +31,7 @@ $black: rgb(19, 16, 16);
     flex-direction: column;
     align-items: center;
     .flow-line {
-        width: 1px;
+        width: 3px;
         min-height: 30px;
         background-color: $black;
         flex: 1;
@@ -141,48 +147,146 @@ $black: rgb(19, 16, 16);
 .pre-write-node {
     border-top: 4px solid #eeb124;
 }
-.switch-node{
-    .ant-list-item:first-of-type{
+
+.switch-node {
+    position: relative;
+    box-shadow: 0 0 3px #d1d1d1;
+    .node-close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        color: #ff0000;
+        font-size: 20px;
+        z-index: 10;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+    .ant-list-item:first-of-type {
+        padding: 10px;
         background-color: rgb(238, 191, 62);
         color: #fff;
         font-size: 16px;
     }
 }
-.branch-block{
+
+.branch-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 15px;
-    .branch-block__inner{
+    position: relative;
+    .branch-add {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        z-index: 10;
+        cursor: pointer;
+        font-size: 20px;
+        color: #66ccff;
+    }
+    .branch-start,
+    .branch-end {
+        position: relative;
+        height: 30px;
+        width: 100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        &::before {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-.8px);
+            width: 3px;
+            height: 30px;
+            content: "";
+            background-color: $black;
+        }
+    }
+    .branch-end {
+        border-bottom: 3px solid $black;
+    }
+    .branch-end.is-first,
+    .branch-end.is-last {
+        border-bottom: none;
+    }
+    .branch-start {
+        border-top: 3px solid $black;
+    }
+    .branch-start.is-first,
+    .branch-start.is-last {
+        border-top: none;
+    }
+    .branch-start.is-first::after {
+        width: 50%;
+        position: absolute;
+        content: "";
+        height: 3px;
+        top: 0;
+        right: 0;
+        background-color: $black;
+    }
+    .branch-start.is-last::after {
+        width: 50%;
+        position: absolute;
+        content: "";
+        height: 3px;
+        top: 0;
+        left: 0;
+        background-color: $black;
+    }
+    .branch-end.is-first::after {
+        width: 50%;
+        position: absolute;
+        content: "";
+        height: 3px;
+        bottom: 0;
+        right: 0;
+        background-color: $black;
+    }
+    .branch-end.is-last::after {
+        width: 50%;
+        position: absolute;
+        content: "";
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background-color: $black;
+    }
+    .branch-block__inner {
         display: flex;
         width: 100%;
         flex: 1;
-
     }
-    .branch-end-block{
+    .branch-end-block {
         width: 100%;
         display: flex;
         justify-content: space-around;
-        border-bottom: 1px solid $black;
         flex-grow: 0;
         flex-shrink: 0;
-        .branch-end-line{
+        .branch-end-line {
             height: 40px;
-            width: 1px;
+            width: 3px;
             background-color: $black;
             flex-grow: 0;
             flex-shrink: 0;
         }
     }
-    .branch-start-block{
+    .branch-end-bottom,
+    .branch-start-top {
+        height: 1px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        background-color: $black;
+    }
+    .branch-start-block {
         width: 100%;
         display: flex;
         position: relative;
         justify-content: space-around;
-        border-top: 1px solid $black;
         flex-grow: 0;
         flex-shrink: 0;
-        .new-branch-icon{
+        .new-branch-icon {
             position: absolute;
             top: -10px;
             left: 50%;
@@ -191,7 +295,7 @@ $black: rgb(19, 16, 16);
             font-size: 20px;
             background-color: #fff;
         }
-        .branch-start-line{
+        .branch-start-line {
             height: 40px;
             width: 1px;
             background-color: $black;

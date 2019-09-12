@@ -139,7 +139,13 @@ export default class BranchNode extends Component<PROP, any> {
     for (let i of list) {
       for(let m=0;m<i.length;m++){
         if (i[m] === node) {
-          i.splice(m, 1)
+          if(node.type==="switch"){
+            list.splice(list.indexOf(i),1)
+          }
+          else{
+            i[m-1].to = i[m+1].to
+            i.splice(m, 2)
+          }
         }
       }
     }
@@ -160,7 +166,7 @@ export default class BranchNode extends Component<PROP, any> {
     let switch1 = new DataNode("switch"),
       add1 = new DataNode("add", null, switch1, {});
     switch1.to = add1;
-    list = list.concat([switch1, add1])
+    list.push([switch1, add1])
     this.setState({ list })
   }
   confirmNode(node: DataNode) {
@@ -183,28 +189,24 @@ export default class BranchNode extends Component<PROP, any> {
 
   }
   render() {
-    const width = this.state.list.length*300+(30*(this.state.list.length-1))+"px"
     return (
       <div className="flow-block">
-        <div className="branch-block" style={{width: width}}>
-          <BranchBegin list={this.state.list} onAdd={this.addNode} />
+        <div className="branch-block">
+          <Icon className="branch-add" type="plus-square" theme="filled" onClick={this.addNode}></Icon>
           <div className="branch-block__inner">
             {
               this.state.list.map((obj: [],index: number) => {
                 return (
                   <div className="flow-container" key={this.id+'_'+index}>
+                  {
+                    index===0?(<div className="branch-start is-first"></div>):index===this.state.list.length-1?(<div className="branch-start is-last"></div>):(<div className="branch-start"></div>)
+                  }
                   {obj.map((sec:DataNode)=>{
                     switch (sec.type) {
                       case "begin":
                         return <BeginNode data={sec.data} name={sec.data.name} key={sec.id} />;
                       case "add":
-                        return <AddNode onClick={(v: any) => this.insertNode(sec, v)} key={sec.id}></AddNode>
-                      case "end":
-                        return (<div className="flow-block" key="end-one">
-                          <div className="end-icon">
-                            <span>结束</span>
-                          </div>
-                        </div>);
+                        return <AddNode onClick={(v: any) => this.insertNode(sec, v)} key={sec.id}></AddNode>;
                       case "switch":
                         return <SwitchNode key={sec.id} onRemove={() => this.removeNode(sec)}></SwitchNode>
                       case "pre-check":
@@ -219,12 +221,14 @@ export default class BranchNode extends Component<PROP, any> {
                         return <BranchNode key={sec.id} onRemove={()=> this.removeNode(sec)} list={sec.data}></BranchNode>
                     }
                   })}
+                  {
+                    index===0?(<div className="branch-end is-first"></div>):index===this.state.list.length-1?(<div className="branch-end is-last"></div>):(<div className="branch-end"></div>)
+                  }
                   </div>
                 )
               })
             }
           </div>
-          <BranchEnd list={this.state.list}></BranchEnd>
         </div>
         <div className="flow-line"></div>
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import WriteNode from './component/write_node'
-import BrancheNode from './component/branch_node'
 import AddNode from './component/add'
 import PreCheck from './component/pre_check'
 import PreWrite from './component/pre_write'
@@ -34,6 +33,7 @@ export class MulitiNode extends DataNode {
   }
 }
 export default class FlowContainer extends Component<any, { data: DataNode[] }>{
+  state: { data: DataNode[]; }
   constructor(props: any) {
     super(props)
     let begin = new DataNode("begin"),
